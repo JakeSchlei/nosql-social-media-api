@@ -31,6 +31,18 @@ const createUser = async (req, res) => {
     }
 };
 
+const deleteUser = async (req, res) => {
+    try {
+        const removeUser = await User.findByIdAndDelete(
+            req.params.userId,
+            {new: true}
+        )
+        res.send('User was removed');
+    } catch (error) {
+        res.status(500).json({ error });   
+    }
+};
+
 const updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(
@@ -41,6 +53,38 @@ const updateUser = async (req, res) => {
         res.json(updatedUser);
     } catch (error) {
         res.status(500).json({ error });  
+    }   
+};
+
+const addFriend = async (req, res) => {
+    try {
+        const addedFriend = await User.findByIdAndUpdate(
+            req.params.userId,
+            {
+                $addToSet: {
+                    friends: req.params.friendId
+                }
+            }
+        )
+        res.send('Friend Added!')
+    } catch (error) {
+        res.status(500).json({ error }); 
+    }
+};
+
+const removeFriend = async (req, res) => {
+    try {
+        const addedFriend = await User.findByIdAndUpdate(
+            req.params.userId,
+            {
+                $pull: {
+                    friends: req.params.friendId
+                }
+            }
+        )
+        res.send('Friend Removed!')
+    } catch (error) {
+        res.status(500).json({ error }); 
     }
 };
 
@@ -49,5 +93,8 @@ module.exports = {
     getAllUsers,
     getOneUser,
     createUser,
-    updateUser
+    updateUser,
+    addFriend,
+    removeFriend,
+    deleteUser
 }
