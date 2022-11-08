@@ -35,7 +35,7 @@ const updateUser = async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(
             req.params.userId,
-            ...req.body,
+            req.body,
             {new: true}
         );
         res.json(updatedUser);
@@ -43,3 +43,11 @@ const updateUser = async (req, res) => {
         res.status(500).json({ error });  
     }
 };
+
+
+module.exports = {
+    getAllUsers,
+    getOneUser,
+    createUser,
+    updateUser
+}
