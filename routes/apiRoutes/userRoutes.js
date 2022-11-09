@@ -6,13 +6,13 @@ router.get('/', getAllUsers);
 router.get('/:userId', getOneUser);
 
 router.post('/', createUser);
-router.post('/', addFriend);
+router.post('/:userId/friends/:friendId', addFriend);
 
 router.put('/:userId', updateUser);
 
 
 router.delete('/:userId', deleteUser);
-router.delete('/:userId', removeFriend);
+router.delete('/:userId/friends/:friendId', removeFriend);
 
 
 
