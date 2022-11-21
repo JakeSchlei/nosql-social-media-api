@@ -27,7 +27,6 @@ const thoughtSchema = new Schema({
     thoughtText: {
         type: String,
         required: true,
-        minLength: 1,
         maxLength: 280
     },
     createdAt: {
@@ -45,7 +44,8 @@ const thoughtSchema = new Schema({
 },
 {
    toJSON: {
-    virtuals: true
+    virtuals: true,
+    getters: true
    },
    id: false
 }
