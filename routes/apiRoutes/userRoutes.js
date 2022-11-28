@@ -6,7 +6,7 @@ router.get('/', getAllUsers);
 router.get('/:userId', getOneUser);
 
 router.post('/', createUser);
-router.post('/:userId/friends/:friendId', addFriend);
+router.post('/:userId/friends/', addFriend);
 
 router.put('/:userId', updateUser);
 
