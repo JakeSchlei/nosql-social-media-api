@@ -1,9 +1,11 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const reactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
-        default: reactionId._id
+        default: () => {
+            return new Types.ObjectId();
+        }
     },
     reactionBody: {
         type: String,
@@ -32,9 +34,6 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (date) => {
-            if (date) return date.toISOString().split("T") [0];
-          },
     },
     username: {
         type: String,
